@@ -163,8 +163,8 @@ function toggleView(view) {
 
 function initializeDataAndVisuals() {
     return Promise.all([
-        d3.csv("netflix.csv"),
-        d3.csv("country.csv")
+        d3.csv("NETFLIX.csv"),
+        d3.csv("Country.csv")
     ]).then(function([netflixData, countryData]) {
         console.log("🔍 Checking raw country names in CSVs...");
         
@@ -268,8 +268,8 @@ function createDualMaps() {
         }
     });
 
-    console.log("SERIES per country (from country.csv - UNIQUE with netflix.csv match):", countryCountsSeries);
-    console.log("SEASONS per country (from netflix.csv - UNIQUE SEASON COMBINATIONS):", countryCountsSeasons);
+    console.log("SERIES per country (from Country.csv - UNIQUE with NETFLIX.csv match):", countryCountsSeries);
+    console.log("SEASONS per country (from NETFLIX.csv - UNIQUE SEASON COMBINATIONS):", countryCountsSeasons);
 
     const maxSeriesCount = Object.values(countryCountsSeries).length ? Math.max(...Object.values(countryCountsSeries)) : 0;
     const maxSeasonsCount = Object.values(countryCountsSeasons).length ? Math.max(...Object.values(countryCountsSeasons)) : 0;
@@ -409,9 +409,9 @@ function openSidePanel(country) {
     console.log(` Raw series found in netflix.csv for ${country}:`, seriesListFromCountry);
     
     if (seriesListFromCountry.length === 0) {
-        console.log(` No series found in netflix.csv for ${country}, trying country.csv...`);
+        console.log(` No series found in NETFLIX.csv for ${country}, trying Country.csv...`);
         seriesListFromCountry = countryToSeriesMap[country] || [];
-        console.log(` Series from country.csv for ${country}:`, seriesListFromCountry);
+        console.log(` Series from Country.csv for ${country}:`, seriesListFromCountry);
     }
     
     console.log(`📊 Total series found for ${country}: ${seriesListFromCountry.length}`);
