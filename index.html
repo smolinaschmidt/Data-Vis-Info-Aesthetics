@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Series Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+</head>
+<body>
+    <div id="landing-page" class="view landing-container">
+        <h1 class="main-title">Explore 1,000+ Netflix Series</h1>
+        <p class="description">Compare seasons, viewership, and global availability across a catalog of more than one thousand series.</p>
+        <div class="landing-buttons">
+            <button class="explore-button" onclick="showChart()">Explore Chart</button>
+            <button class="explore-button map-btn" onclick="showMapFromLanding()">View Map</button>
+        </div>
+    </div>
+
+    <div id="chart-page" class="view hidden">
+        <div class="header-row">
+            <h1 class="chart-title">Netflix Data Visualizer</h1>
+            <button class="back-button" onclick="showLanding()">Back to Home</button>
+        </div>
+        
+        <div id="filter-controls">
+            <div class="chart-filters" id="chart-filters">
+                <button class="filter-button active" id="all-filter-button" onclick="updateChart('GlobalFilter', 'All', this)">All Series</button>
+                <label for="global-filter">Available Globally:</label>
+                <select id="global-filter" onchange="updateChart('GlobalFilter', this.value)">
+                    <option value="All">All Statuses</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <label for="series-search">Search Series:</label>
+                <input type="text" id="series-search" placeholder="Search..." onkeyup="updateChart('Search', this.value)">
+            </div>
+
+            <div class="view-switch">
+                <button class="switch-btn active" id="view-chart-btn" onclick="toggleView('chart')">Chart View</button>
+                <button class="switch-btn" id="view-map-btn" onclick="toggleView('map')">Map View</button>
+            </div>
+        </div>
+
+        <div id="chart-wrapper"> 
+            <div id="bubble-chart"></div>
+        </div>
+
+        <div id="map-wrapper">
+            <div id="map-left" class="map-col">
+                <div class="map-header">Series by Country</div>
+                <div id="map-series" class="map-canvas"></div>
+            </div>
+            
+            <div id="map-right" class="map-col">
+                <div class="map-header">Seasons by Country</div>
+                <div id="map-seasons" class="map-canvas"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="side-panel" class="hidden-panel">
+        <div class="panel-header">
+            <h2 id="panel-country-title">Country</h2>
+            <button class="close-btn" onclick="closePanel()">✕</button>
+        </div>
+        <div id="panel-content"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="script.js"></script>
+</body>
+</html>
